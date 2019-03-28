@@ -34,49 +34,50 @@
 </head>
 
 <body>
-  <header class=password-generator>
-    <h1>需要生成密码？试试 1Password 强密码生成器。</h1>
-    <p>生成安全、随机的密码以保持网络安全。</p>
-    <div id=spg-ready class="inputfield-container done"><input type=text>
-      <div class=password-overlay></div>
-    </div>
-    <div class=inputs><select id=random-password required>
-        <option value=characters selected>随机密码</option>
-        <option value=memorable>易记密码</option>
-        <option value=pin>PIN</option>
-      </select>
-      <button id=refresh-token title="Refresh Password Generator"></button>
-      <button id=copy-secure-password>复制安全密码</button></div>
-    <div class="randomizing-characters done">
-      <div class=slidecontainer id=recipe-characters>
-        <p>长度</p><input type=range min=1 max=100 value=50 class=slider id=myRange>
-        <p class=slider-value>20</p>
-        <div><input type=checkbox id=numbers name=feature>
-          <label for=numbers>数字</label></div>
-        <div><input type=checkbox id=symbols name=feature>
-          <label for=symbols>符号</label></div>
+  <main id=password-generator>
+    <header class=password-generator>
+      <h1>需要生成密码？试试 1Password 强密码生成器。</h1>
+      <p>生成安全、随机的密码以保持网络安全。</p>
+      <div id=spg-ready class="inputfield-container done"><input type=text>
+        <div class=password-overlay></div>
       </div>
-      <div class=slidecontainer id=recipe-memorable>
-        <p>长度</p><input type=range min=3 max=20 value=5 class=slider id=memorable-range>
-        <p class=slider-value>4</p>
-        <div><input type=checkbox id=capitalize name=feature>
-          <label for=capitalize>首字母大写</label></div>
-        <div><input type=checkbox id=fullWords name=feature>
-          <label for=fullWords>完整词语</label></div>
+      <div class=inputs><select id=random-password required>
+          <option value=characters selected>随机密码</option>
+          <option value=memorable>易记密码</option>
+          <option value=pin>PIN</option>
+        </select>
+        <button id=refresh-token title="Refresh Password Generator"></button>
+        <button id=copy-secure-password>复制安全密码</button></div>
+      <div class="randomizing-characters done">
+        <div class=slidecontainer id=recipe-characters>
+          <p>长度</p><input type=range min=1 max=100 value=50 class=slider id=myRange>
+          <p class=slider-value>20</p>
+          <div><input type=checkbox id=numbers name=feature>
+            <label for=numbers>数字</label></div>
+          <div><input type=checkbox id=symbols name=feature>
+            <label for=symbols>符号</label></div>
+        </div>
+        <div class=slidecontainer id=recipe-memorable>
+          <p>长度</p><input type=range min=3 max=20 value=5 class=slider id=memorable-range>
+          <p class=slider-value>4</p>
+          <div><input type=checkbox id=capitalize name=feature>
+            <label for=capitalize>首字母大写</label></div>
+          <div><input type=checkbox id=fullWords name=feature>
+            <label for=fullWords>完整词语</label></div>
+        </div>
+        <div class=slidecontainer id=recipe-pin>
+          <p>长度</p><input type=range min=3 max=20 value=5 class=slider id=pin-range>
+          <p class=slider-value>6</p>
+        </div>
       </div>
-      <div class=slidecontainer id=recipe-pin>
-        <p>长度</p><input type=range min=3 max=20 value=5 class=slider id=pin-range>
-        <p class=slider-value>6</p>
+      <div id=spg-copied class="copied overlay">
+        <div class=modal><img src=./img/password-generator/modal-close.67f4a74b2c1025a319de491731a55384.svg class=modal-close alt=Close>
+          <h2>已复制密码！</h2>
+        </div>
       </div>
-    </div>
-    <div id=spg-copied class="copied overlay">
-      <div class=modal><img src=./img/password-generator/modal-close.67f4a74b2c1025a319de491731a55384.svg class=modal-close alt=Close>
-        <h2>已复制密码！</h2>
-      </div>
-    </div>
-  </header>
-  <footer>
-  </footer>
+    </header>
+    <footer>
+    </footer>
 </body>
 
 </html>
