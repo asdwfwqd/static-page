@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Index</title>
+  <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="./js/showdown.min.js"></script>
+  <script type="text/javascript">
+    function compile() {
+      $.ajax({
+        type: "GET",
+        url: "./index.md",
+        cache: false,
+        success: function(url) {
+          var text = url;
+          var converter = new showdown.Converter();
+          var html = converter.makeHtml(text);
+          document.getElementById('body').innerHTML = html;
+        }
+      })
+    }
+  </script>
+</head>
+
+<body id="body" onload="compile()">
+</body>
+
+</html>
