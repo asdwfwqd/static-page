@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>备忘录</title>
+  <title>中铁渤海轮渡</title>
   <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="./js/showdown.min.js"></script>
+  <script type="text/javascript" src="./js/showdown.min.js"></script><!-- https://github.com/showdownjs/showdown -->
   <script type="text/javascript">
     function compile() {
       $.ajax({
@@ -15,6 +15,8 @@
         success: function(url) {
           var text = url;
           var converter = new showdown.Converter();
+          converter.setOption('tables', 'true');
+          converter.setOption('emoji', 'true'); //https://github.com/showdownjs/showdown/wiki/Emojis
           var html = converter.makeHtml(text);
           document.getElementById('body').innerHTML = html;
         }
