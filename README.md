@@ -10,6 +10,7 @@ static page of [asdwfwqd.com](https://asdwfwqd.com)
 -   [强密码生成器](https://asdwfwqd.com/password-generator)
 -   [Trump Executive Order Generator](https://asdwfwqd.com/trump-generator)
 -   [h5ai](https://asdwfwqd.com/download)
+-   [weird fonts](https://asdwfwqd.com/weird-fonts)
 
 ##### others
 
