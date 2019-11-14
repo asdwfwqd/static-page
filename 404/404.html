@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>404 - Page Not Found</title>
+	<meta name="Author" content="Timo Van Neerden" />
+	<meta name="viewport" content="width=device-width, user-scalable=yes" />
+	<style>
+		html {
+			font-size: 16px;
+			position: relative;
+			min-height: 100%;
+			box-sizing: border-box;
+			font-family: monospace;
+		}
+
+		body {
+			background-color: #000;
+			color: white;
+			font-size: 62.5%;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+
+		.bg-stone {
+			background: black top left repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAABABAMAAACJoGidAAAAD1BMVEUAAAB0dHS8vLzYKAD8/Pyux+yVAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wcGDyUb0T3ZoAAAAEBJREFUOMvtyLENwDAMxECtwBU4y+8/k4sYQdwqKs2GwFWSQFV21QDVB1T1wn8AgNqHDkyUT9AF3y7MAEc9GGgBWUBxsYkvZs8AAAAASUVORK5CYII=);
+			height: 128px;
+		}
+
+		#bottom-stone {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+		}
+
+		#bottom-bowser {
+			position: absolute;
+			bottom: 128px;
+			right: 0px;
+			background-image: url(data:image/gif;base64,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);
+			height: 128px;
+			width: 128px;
+			animation: bowser 12s infinite linear alternate 1s;
+		}
+
+		/** animation bowser moving :p **/
+		@keyframes bowser {
+			0% {
+				right: 0px;
+			}
+
+			50% {
+				right: 512px;
+			}
+
+			100% {
+				right: 0px;
+			}
+		}
+
+		main {
+			position: absolute;
+			top: 128px;
+			bottom: 256px;
+			width: 100%;
+			text-align: center;
+			padding-top: 5em;
+		}
+
+		h1 {
+			font-size: 4em;
+			font-weight: normal;
+		}
+
+		h2 {
+			font-size: 2em;
+			font-weight: normal;
+		}
+
+		main p {
+			padding: 15px;
+			height: 80px;
+		}
+
+		main p a,
+		main p a img {
+			vertical-align: middle;
+			font-size: 1.6em;
+			margin: 0 10px;
+
+		}
+
+		@media (max-width: 639px) {
+			h1 {
+				font-size: 1.7em;
+				margin-top: 0;
+			}
+
+			h2 {
+				font-size: 1.3em;
+			}
+
+			main {
+				top: 64px;
+			}
+
+			main p a {
+				font-size: 1.2em;
+			}
+
+			.bg-stone {
+				height: 64px;
+			}
+
+			#bottom-bowser {
+				bottom: 64px;
+			}
+
+			@keyframes bowser {
+				0% {
+					right: 0px;
+				}
+
+				50% {
+					right: 256px;
+				}
+
+				100% {
+					right: 0px;
+				}
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="bg-stone" id="top-stone"></div>
+
+	<main>
+		<h1>Error 404</h1>
+		<h2>Sorry, but the page you are looking for is somewhere else.</h2>
+		<p><a href="/"><img src="/favicon.ico" alt="main logo" style="width:41px;height:41px;" />Back to the site</a></p>
+	</main>
+
+	<div id="bottom-bowser"></div>
+	<div class="bg-stone" id="bottom-stone"></div>
+</body>
+
+</html>

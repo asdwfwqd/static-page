@@ -1,4 +1,6 @@
-#### static-page
+### **<** **>** with :heart:
+
+##### static-page
 
 static page of [asdwfwqd.com](https://asdwfwqd.com)
 
@@ -11,6 +13,7 @@ static page of [asdwfwqd.com](https://asdwfwqd.com)
 -   [Trump Executive Order Generator](https://asdwfwqd.com/trump-generator)
 -   [h5ai](https://asdwfwqd.com/download)
 -   [weird fonts](https://asdwfwqd.com/weird-fonts)
+-   [muscle wiki](https://asdwfwqd.com/muscle-wiki)
 
 ##### others
 
