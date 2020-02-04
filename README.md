@@ -1,8 +1,12 @@
-### **<** **>** with :heart:
+### **&lt;** **>** with :heart:
 
 ##### static-page
 
 static page of [asdwfwqd.com](https://asdwfwqd.com)
+
+-   [x] certificate with [Let’s Encrypt](https://letsencrypt.org/)
+-   [x] add to [HSTS Preload List Submission](https://hstspreload.org/?domain=asdwfwqd.com)
+-   [ ] two mirror sites
 
 ##### catalog
 
