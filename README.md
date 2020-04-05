@@ -20,8 +20,10 @@ static page of [asdwfwqd.com](https://asdwfwqd.com)
     -   [550×550](https://asdwfwqd.com/himawari8?resolution=1d)
     -   [1100×1100](https://asdwfwqd.com/himawari8?resolution=2d)
     -   [2200×2200](https://asdwfwqd.com/himawari8?resolution=4d)
-    -   [4400×4400](https://asdwfwqd.com/himawari8?resolution=8d)
-    -   [8800×8800](https://asdwfwqd.com/himawari8?resolution=16d)
+    -   ~~4400×4400~~(offline due to performance problem)
+    -   ~~8800×8800~~(offline due to performance problem)
+    -   ~~11000×11000~~(offline due to performance problem)
+-   [jsnes](https://asdwfwqd.com/jsnes)
 
 ### others
 
