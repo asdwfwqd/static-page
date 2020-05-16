@@ -14,6 +14,7 @@ static page of [asdwfwqd.com](https://asdwfwqd.com)
 -   [强密码生成器](https://asdwfwqd.com/password-generator)
 -   [Trump Executive Order Generator](https://asdwfwqd.com/trump-generator)
 -   [weird fonts](https://asdwfwqd.com/weird-fonts)
+-   [SubPlayer](https://asdwfwqd.com/subplayer)
 -   [h5ai](https://asdwfwqd.com/download)
 -   himawari8
     -   [thumbnail](https://asdwfwqd.com/himawari8?resolution=1d)
