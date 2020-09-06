@@ -31,6 +31,6 @@ static page of [asdwfwqd.com](https://asdwfwqd.com)
 
 ### Others
 
--   [favicon.ico](favicon.ico)
--   [robots.txt](robots.txt)
+-   [favicon.ico](https://asdwfwqd.com/favicon.ico)
+-   [robots.txt](https://asdwfwqd.com/robots.txt)
 -   [404](https://asdwfwqd.com/404)
