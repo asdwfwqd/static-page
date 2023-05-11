@@ -10,7 +10,7 @@ static page of [asdwfwqd.com](https://asdwfwqd.com)
 
 ### Catalog
 
--   [中铁渤海轮渡](https://asdwfwqd.com/ferry)
+-   [轮渡](https://asdwfwqd.com/ferry)
 -   himawari8
     -   [thumbnail](https://asdwfwqd.com/himawari8?resolution=1d)
     -   [550×550](https://asdwfwqd.com/himawari8?resolution=1d)
@@ -19,11 +19,10 @@ static page of [asdwfwqd.com](https://asdwfwqd.com)
     -   ~~4400×4400~~(offline due to performance problem)
     -   ~~8800×8800~~(offline due to performance problem)
     -   ~~11000×11000~~(offline due to performance problem)
--   [冰箱在线激活器](https://asdwfwqd.com/icebox)
+-   [冰箱在线激活器V1](https://asdwfwqd.com/iceboxV1)
+-   [冰箱在线激活器V2](https://asdwfwqd.com/iceboxV2)
 -   [SPACEX ISS Docking Simulator](https://asdwfwqd.com/iss-sim)
--   [jsnes](https://asdwfwqd.com/jsnes)
 -   [Json在线解析及格式化验证](https://asdwfwqd.com/json-formatter)
--   [备忘录](https://asdwfwqd.com/note)
 -   [强密码生成器](https://asdwfwqd.com/password-generator)
 -   [SubPlayer](https://asdwfwqd.com/subplayer)
 -   [Trump Executive Order Generator](https://asdwfwqd.com/trump-generator)
