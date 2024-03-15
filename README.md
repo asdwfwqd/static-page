@@ -28,6 +28,7 @@ static page of [asdwfwqd.com](https://asdwfwqd.com)
 -   [Trump Executive Order Generator](https://asdwfwqd.com/trump-generator)
 -   [weird fonts](https://asdwfwqd.com/weird-fonts)
 -   [h5ai](https://asdwfwqd.com/download)
+-   [Game](https://asdwfwqd.com/game)
 
 ### Others
 

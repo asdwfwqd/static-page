@@ -1,0 +1,129 @@
+{
+  "settings": {
+    "mainFont": "durandal"
+  },
+
+  "general": {
+    "adventure": "AN ADVENTURE TOO BIG\n FOR THE REAL WORLD",
+    "adventureDesktopSize": 36,
+    "adventureMobileSize": 36,
+    "theaters": "IN THEATERS MARCH 29",
+    "theatersDesktopSize": 26,
+    "theatersMobileSize": 26,
+    "day": 29,
+    "month": 2,
+    "year": 2018,
+    "released": "NOW IN THEATERS",
+    "releasedDesktopSize": 26,
+    "releasedMobileSize": 26,
+    "play": "PLAY",
+    "playDesktopSize": 48,
+    "playMobileSize": 48,
+    "playDesktopY": -6,
+    "playMobileY": -6
+  },
+
+  "share": {
+    "showFacebook": true,
+    "showTwitter": true,
+    "shareSnap": "PRESS & HOLD TO SHARE",
+    "shareSize": 22,
+    "shareLabelY": 3
+  },
+
+  "rotateWarning": {
+    "rotate": "PLEASE ROTATE YOUR DEVICE",
+    "rotateSize": 24
+  },
+
+  "pauseScreen": {
+    "resumeMobile": "TAP TO RESUME",
+    "resumeDesktop": "CLICK TO RESUME",
+    "resumeDesktopSize": 24,
+    "resumeMobileSize": 18
+  },
+
+  "instructions": {
+    "instructions1": "COLLECT COINS\n  TO UPGRADE",
+    "instructions1DesktopSize": 30,
+    "instructions1MobileSize": 30,
+    "instructions2Mobile": "TAP TO MOVE",
+    "instructions2MobileSize": 30,
+    "instructions2Desktop": "CLICK TO MOVE",
+    "instructions2DesktopSize": 30
+  },
+
+  "store": {
+    "useText": false,
+    "gun": "WEAPONS",
+    "gunDesktopSize": 54,
+    "gunMobileSize": 54,
+    "gunColor": "#00ff00",
+    "gunDesktopY": 20,
+    "gunMobileY": 20,
+    "car": "CARS",
+    "carDesktopSize": 54,
+    "carMobileSize": 54,
+    "carColor": "#ffff00",
+    "carDesktopY": 20,
+    "carMobileY": 20,
+    "playDesktopSize": 52,
+    "playMobileSize": 52,
+    "playDesktopY": 2,
+    "playMobileY": 2
+  },
+
+  "footer": {
+    "fontScale": 1,
+    "copyright": "&copy; 2018 Warner Bros. Ent.  All Rights Reserved",
+    "wb": {
+      "link": "http://www.warnerbros.com/",
+      "image": "images/footer/logo.png"
+    },
+    "rating": {
+      "visible": true,
+      "image": "images/footer/rating.png"
+    },
+    "credits": {
+      "image": "images/footer/credits.png"
+    },
+    "mpaa": {
+      "visible": true,
+      "text": "MPAA",
+      "link": "http://mpaa.org/"
+    },
+    "parental": {
+      "visible": true,
+      "text": "PARENTAL GUIDE",
+      "link": "http://www.parentalguide.org/"
+    },
+    "ratings": {
+      "visible": true,
+      "text": "FILMRATINGS",
+      "link": "http://filmratings.com/"
+    },
+    "ads": {
+      "visible": true,
+      "text": "AD CHOICES",
+      "link": "http://www.warnerbros.com/privacy-center-wb-privacy-policy#p5"
+    },
+    "terms": {
+      "visible": true,
+      "text": "TERMS OF USE",
+      "link": "http://www.warnerbros.com/privacy/terms.html"
+    },
+    "privacy": {
+      "visible": true,
+      "text": "PRIVACY POLICY",
+      "link": "http://www.warnerbros.com/privacy/policy.html"
+    }
+  },
+  "outdated": {
+    "fontScale": 1,
+    "title": "Oh no!",
+    "body": "Your browser looks pretty old. It won't be able to keep up with Parzival! You should consider updating:",
+    "download": "Download",
+    "chrome": "Chrome",
+    "firefox": "Firefox"
+  }
+}

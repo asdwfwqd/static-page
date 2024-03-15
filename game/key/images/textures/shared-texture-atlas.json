@@ -1,0 +1,408 @@
+{"frames": {
+
+"ui-bg-car":
+{
+	"frame": {"x":1607,"y":830,"w":300,"h":106},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":106},
+	"sourceSize": {"w":300,"h":106},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-bg-gun":
+{
+	"frame": {"x":1320,"y":1289,"w":300,"h":106},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":106},
+	"sourceSize": {"w":300,"h":106},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-button-play-down":
+{
+	"frame": {"x":757,"y":1495,"w":466,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":466,"h":144},
+	"sourceSize": {"w":466,"h":144},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-button-play":
+{
+	"frame": {"x":1320,"y":1042,"w":466,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":466,"h":144},
+	"sourceSize": {"w":466,"h":144},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-buybox-accept-press":
+{
+	"frame": {"x":1811,"y":1526,"w":108,"h":38},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":108,"h":38},
+	"sourceSize": {"w":108,"h":38},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-buybox-accept":
+{
+	"frame": {"x":1811,"y":1567,"w":108,"h":38},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":108,"h":38},
+	"sourceSize": {"w":108,"h":38},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-buybox-box":
+{
+	"frame": {"x":1320,"y":823,"w":284,"h":216},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":284,"h":216},
+	"sourceSize": {"w":284,"h":216},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-buybox-coin":
+{
+	"frame": {"x":1980,"y":488,"w":20,"h":22},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":20,"h":22},
+	"sourceSize": {"w":20,"h":22},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-buybox-deny-press":
+{
+	"frame": {"x":1562,"y":1595,"w":108,"h":38},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":108,"h":38},
+	"sourceSize": {"w":108,"h":38},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-buybox-deny":
+{
+	"frame": {"x":1673,"y":1595,"w":108,"h":38},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":108,"h":38},
+	"sourceSize": {"w":108,"h":38},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-car-batmobile":
+{
+	"frame": {"x":1377,"y":1551,"w":182,"h":58},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":182,"h":58},
+	"sourceSize": {"w":182,"h":58},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-car-mystery":
+{
+	"frame": {"x":1226,"y":1551,"w":148,"h":90},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":148,"h":90},
+	"sourceSize": {"w":148,"h":90},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-car-racer":
+{
+	"frame": {"x":1818,"y":1430,"w":180,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":52},
+	"sourceSize": {"w":180,"h":52},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-car-tank":
+{
+	"frame": {"x":555,"y":1554,"w":180,"h":66},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":66},
+	"sourceSize": {"w":180,"h":66},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-coincount":
+{
+	"frame": {"x":1763,"y":1244,"w":40,"h":42},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":42},
+	"sourceSize": {"w":40,"h":42},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-element-coincount":
+{
+	"frame": {"x":1865,"y":1185,"w":120,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":120,"h":60},
+	"sourceSize": {"w":120,"h":60},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-element-nameticker":
+{
+	"frame": {"x":2,"y":1495,"w":752,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":752,"h":56},
+	"sourceSize": {"w":752,"h":56},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-gameover-share-facebook":
+{
+	"frame": {"x":1910,"y":830,"w":56,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":56},
+	"sourceSize": {"w":56,"h":56},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-gameover-share-snapchat":
+{
+	"frame": {"x":1932,"y":1485,"w":56,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":56},
+	"sourceSize": {"w":56,"h":56},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-gameover-share-twitter":
+{
+	"frame": {"x":1922,"y":1544,"w":56,"h":56},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":56},
+	"sourceSize": {"w":56,"h":56},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-gun-eraser":
+{
+	"frame": {"x":1818,"y":1365,"w":176,"h":62},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":176,"h":62},
+	"sourceSize": {"w":176,"h":62},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-gun-ripper":
+{
+	"frame": {"x":1789,"y":1092,"w":174,"h":90},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":174,"h":90},
+	"sourceSize": {"w":174,"h":90},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-gun-rpg":
+{
+	"frame": {"x":1607,"y":939,"w":180,"h":92},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":92},
+	"sourceSize": {"w":180,"h":92},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-gun-vgun":
+{
+	"frame": {"x":1205,"y":1333,"w":112,"h":60},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":112,"h":60},
+	"sourceSize": {"w":112,"h":60},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-header-car":
+{
+	"frame": {"x":2,"y":1339,"w":1200,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":75},
+	"sourceSize": {"w":1200,"h":78},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-header-gun":
+{
+	"frame": {"x":2,"y":1417,"w":1200,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":75},
+	"sourceSize": {"w":1200,"h":76},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-header-snap":
+{
+	"frame": {"x":805,"y":249,"w":1200,"h":236},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":236},
+	"sourceSize": {"w":1200,"h":236},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-header":
+{
+	"frame": {"x":805,"y":2,"w":1200,"h":244},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":244},
+	"sourceSize": {"w":1200,"h":244},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-howto-frame":
+{
+	"frame": {"x":805,"y":488,"w":512,"h":842},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":842},
+	"sourceSize": {"w":512,"h":842},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-howto-goldcoins":
+{
+	"frame": {"x":1320,"y":1244,"w":440,"h":42},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":440,"h":42},
+	"sourceSize": {"w":440,"h":42},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-item-equipped":
+{
+	"frame": {"x":1623,"y":1289,"w":192,"h":150},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":150},
+	"sourceSize": {"w":192,"h":150},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-item-frame-car":
+{
+	"frame": {"x":1790,"y":939,"w":192,"h":150},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":150},
+	"sourceSize": {"w":192,"h":150},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-item-frame-gun":
+{
+	"frame": {"x":1226,"y":1398,"w":192,"h":150},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":150},
+	"sourceSize": {"w":192,"h":150},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-item-locked":
+{
+	"frame": {"x":1421,"y":1398,"w":192,"h":150},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":150},
+	"sourceSize": {"w":192,"h":150},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-item-unlocked":
+{
+	"frame": {"x":1616,"y":1442,"w":192,"h":150},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":150},
+	"sourceSize": {"w":192,"h":150},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-preloader-bar":
+{
+	"frame": {"x":2,"y":1554,"w":550,"h":79},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":550,"h":79},
+	"sourceSize": {"w":550,"h":79},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-preloader-barfill":
+{
+	"frame": {"x":1320,"y":1189,"w":542,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":542,"h":52},
+	"sourceSize": {"w":542,"h":52},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-title-background":
+{
+	"frame": {"x":2,"y":2,"w":800,"h":1334},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":1334},
+	"sourceSize": {"w":800,"h":1334},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-title-play-down":
+{
+	"frame": {"x":1655,"y":488,"w":322,"h":168},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":322,"h":168},
+	"sourceSize": {"w":322,"h":168},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-title-play":
+{
+	"frame": {"x":1655,"y":659,"w":322,"h":168},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":322,"h":168},
+	"sourceSize": {"w":322,"h":168},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-wade-body":
+{
+	"frame": {"x":1320,"y":488,"w":332,"h":332},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":332,"h":332},
+	"sourceSize": {"w":332,"h":332},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-wade-goggles":
+{
+	"frame": {"x":1811,"y":1485,"w":118,"h":38},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":38},
+	"sourceSize": {"w":118,"h":38},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-wade-scannerback":
+{
+	"frame": {"x":1377,"y":1612,"w":70,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":20},
+	"sourceSize": {"w":70,"h":20},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"ui-wade-scannertop":
+{
+	"frame": {"x":1818,"y":1248,"w":132,"h":114},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":132,"h":114},
+	"sourceSize": {"w":132,"h":114},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "shared-texture-atlas.png",
+	"format": "RGBA8888",
+	"size": {"w":2007,"h":1643},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:6582928bf5a7a216cebfaeb28c2f84ee:18cb4e2ffb212ea076ff40bef76668a8:ac030d9db02f8315d3f3332d4bf7c461$"
+}
+}
