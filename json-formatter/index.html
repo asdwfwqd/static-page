@@ -1,165 +1,265 @@
-<!-- source:www.json.cn,just for person use -->
 <!DOCTYPE html>
-<html lang="zh-CN">
+
+<html class="light-style layout-navbar-fixed layout-compact layout-menu-fixed" dir="ltr" data-theme="theme-default"
+    data-assets-path="/r/" data-template="vertical-menu-template" data-layout-type="wide">
+
 <head>
-    <title>Json在线解析及格式化验证</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta http-equiv="Cache-Control" content="max-age=7200" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all" />
-    <meta name="author" content="json.cn" />
-    <meta name="keywords" content="json,json在线解析,json格式化,json格式验证,json转xml,xml转json"/>
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/font-awesome.min.css" rel="stylesheet">
-    <link href="./css/base.css" rel="stylesheet">
-    <style></style>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>JSON在线解析及格式化验证</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./r/img/favicon/favicon.ico" />
+
+    <!-- Fonts... -->
+    <link href="./r/css/global.css" rel="stylesheet" />
+
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="./r/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="./r/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="./r/css/demo.css" />
+    <link rel="stylesheet" href="./r/css/index.css?202411211140" />
+
+    <!-- header -->
+    <script src="./r/vendor/js/header.js?202411211140"></script>
 </head>
-<body style="over-flow:hidden;">
-<main class="row-fluid">
-    <div class="col-md-5" style="padding:0;">
-        <textarea id="json-src" placeholder="在此输入json字符串或XML字符串..."   class="form-control"  style="height:553px;padding:0 10px 10px 20px;border:0;border-right:solid 1px #ddd;border-bottom:solid 1px #ddd;border-radius:0;resize: none; outline:none;">{&#13"Json解析":"支持格式化高亮折叠",&#13"支持XML转换":"支持XML转换Json,Json转XML",&#13"Json格式验证":"更详细准确的错误信息"</textarea>
-    </div>
-    <div class="col-md-7" style="padding:0;">
-        <div style="padding:10px;font-size:16px;border-bottom:solid 1px #ddd;" class="navi">
-            <a href="#" class="tip zip" title="压缩"  data-placement="bottom"><i class="fa fa-database"></i></a>
-            <a href="#" class="tip xml" title="转XML"  data-placement="bottom"><i class="fa fa-file-excel-o"></i></a>
-            <a href="#" class="tip shown"  title="显示行号"  data-placement="bottom"><i class="glyphicon glyphicon-sort-by-order"></i></a>
-            <a href="#" class="tip clear" title="清空"  data-placement="bottom"><i class="fa fa-trash"></i></a>
-            <a href="#" class="tip save" title="保存"  data-placement="bottom"><i class="fa fa-floppy-o"></i></a>
-        </div>
-        <div id="right-box"  style="height:510px;border-right:solid 1px #ddd;border-bottom:solid 1px #ddd;border-radius:0;resize: none;overflow-y:scroll; outline:none;position:relative;">
-            <div id="line-num" style="background-color:#fafafa;padding:0px 8px;float:left;border-right:dashed 1px #eee;display:none;z-index:-1;color:#999;position:absolute;text-align:center;over-flow:hidden;">
-                <div>0</div>
+
+<body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-navbar-full layout-horizontal layout-without-menu">
+        <div class="layout-container">
+            <!-- Navbar -->
+            <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
+                <div class="container-fluid">
+                    <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
+                        <a href="/" class="app-brand-link gap-2">
+                            <span class="app-brand-text demo menu-text fw-bold">Json.<b class="text-dark">cn</b></span>
+                        </a>
+                        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
+                            <i class="ti ti-x ti-sm align-middle"></i>
+                        </a>
+                    </div>
+
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="ti ti-menu-2 ti-sm"></i>
+                        </a>
+                    </div>
+                    <div class="navbar-nav-right d-flex align-items-center flex-grow-1" id="navbar-collapse">
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <!-- Style Switcher -->
+                            <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                                    data-bs-toggle="dropdown">
+                                    <i class="ti ti-md"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
+                                            <span class="align-middle"><i class="ti ti-sun me-2"></i>浅色</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
+                                            <span class="align-middle"><i class="ti ti-moon me-2"></i>深色</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
+                                            <span class="align-middle"><i
+                                                    class="ti ti-device-desktop me-2"></i>系统</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- / Style Switcher-->
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- / Navbar -->
+            <!-- Layout container -->
+            <div class="layout-page init-top-padding">
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <div class="container-fluid flex-grow-1 container-p-y">
+                        <!-- json格式化 -->
+                        <div class="card card-feature">
+                            <div class="card-body">
+                                <div class="row" id="dragParent">
+                                    <div class="col-md-5 input-area">
+                                        <div class="input-gap" id="jsonTxtAreaGap">
+                                            <div id="line-numbers" class="textarea__lines text-muted"></div>
+                                        </div>
+                                        <div class="input-area-container" id="jsonTxtAreaContainer">
+                                            <textarea class="form-control no-scrollbar" placeholder="请输入json数据..."
+                                                id="json-src"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="area-drag" id="dragEle">
+                                        <span class="ti ti-layout-distribute-vertical"></span>
+                                    </div>
+                                    <div class="col-md-7 format-area">
+                                        <div class="top-btn-area">
+                                            <button type="button" class="btn btn-icon zip" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="压缩">
+                                                <span class="ti ti-stack-push"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-icon xml" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="转XML">
+                                                <span class="ti ti-file-x"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-icon shown" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="显示行号">
+                                                <span class="ti ti-list-numbers"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-icon clear" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="清空">
+                                                <span class="ti ti-trash"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-icon save" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="保存">
+                                                <span class="ti ti-file-download"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-icon clipboard-btn"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="复制"
+                                                data-clipboard-target="#json-target">
+                                                <span class="ti ti-copy"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-icon compress" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="折叠">
+                                                <span class="ti ti-fold"></span>
+                                            </button>
+                                            <button type="button" class="btn btn-icon example" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="示例">
+                                                <span class="ti ti-bulb"></span>
+                                            </button>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" checked name="cancelZY"
+                                                    id="cancelZY" />
+                                                <label class="form-check-label" for="cancelZY">
+                                                    保留转义
+                                                </label>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <button type="button" class="btn btn-icon float-end d-none d-lg-block"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="全屏"
+                                                    id="formatFullScreen">
+                                                    <span class="ti ti-arrows-maximize"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="bottom-format-area" id="jsonFormatArea">
+                                            <div class="line-num-container" id="lineNumContainer">
+                                                <div id="line-num" class="line-num text-muted">
+                                                    <div>0</div>
+                                                </div>
+                                            </div>
+                                            <div id="jsonFormatContainer" class="json-format-area">
+                                                <div class="text-muted editable-tip">可点击键值进行编辑</div>
+                                                <div id="hidden-message-box"
+                                                    class="alert alert-danger alert-dismissible" role="alert">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                        aria-label="Close">
+                                                    </button>
+                                                    <div class="d-flex">
+                                                        <span class="alert-icon text-danger me-2">
+                                                            <i class="ti ti-bell ti-xs"></i>
+                                                        </span>
+                                                        <p>提示：<span id="hidden-message">默认警告</span></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ro" id="json-target">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ json格式化 -->
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5 class="card-title">工具介绍</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    JSON是一种取代XML的数据结构，与xml相比，它更小巧，但描述能力却不差。JSON就是一串字符串，只不过元素会使用特定的符号标注：
+                                <ul>
+                                    <li><code><strong>{}</strong></code> 双括号表示对象；</li>
+                                    <li><code><strong>[]</strong></code> 中括号表示数组；</li>
+                                    <li><code><strong>""</strong></code> 双引号内是属性或值；</li>
+                                    <li><code><strong>:</strong></code> 冒号表示后者是前者的值(这个值可以是字符串、数字、也可以是另一个数组或对象)</li>
+                                </ul>
+                                </p>
+
+                                <p>所以 <code><strong>{"name": "Tom"}</strong></code> 可以理解为是一个包含name为Tom的对象，而
+                                    <code><strong>[{"name: "Tom"}, {"name": "Jerry"}]</strong></code> 就表示包含两个对象的数组。<br>
+                                    <br>
+                                    问：为什么 <code><strong>{name:'json'}</strong></code> 在检验时通过不了？<br>
+                                    答：JSON官网规范规定，如果是字符串，那不管是键或值最好都用双引号引起来，所以上面的代码就是
+                                    <code><strong>{"name":"json"}</strong></code>。<br>
+                                    <br>
+                                </p>
+
+                                <p><strong>工具的进阶玩法</strong><br>
+                                    使用url参数传入json数据，搭配一些软件可以快速查看要解析的内容：<br>
+                                    <code><strong>fullscreen</strong></code> 参数，访问时带上这个链接会自动进入<a
+                                        href="?fullscreen" target="_blank">专注模式</a>，畅享清爽简洁的在线解析视图。链接：<a
+                                        href="?fullscreen"
+                                        target="_blank">json.cn/?<strong>fullscreen</strong></a>。<br>
+                                    <code><strong>data</strong></code> 参数，通过这个参数，直接将json数据，传递给工具，示例：<a
+                                        href="#data=%7B%22name%22%3A%22Tom%22%2C%22age%22%3A30%7D"
+                                        target="_blank">json.cn/#<strong>data={"name":"John","age":30}</strong></a><br>
+                                    <code><strong>url</strong></code> 参数，工具会基于您的当前网络，尝试获取指定url的json数据，示例：<a
+                                        href="#url=https://static.json.cn/r/json/demo.json"
+                                        target="_blank">json.cn/#<strong>url=https://static.json.cn/r/json/demo.json</strong></a><br>
+                                    注意：<br>
+                                    &nbsp;&nbsp;data和url是在#号后面，不是?号，这两个参数内容，会在读取后自动清空。<br>
+                                    &nbsp;&nbsp;这样你的解析数据，仍然只会停留在本地，不会发往我们的服务器，也尽可能地避免了被搜索引擎以及统计代码所抓取。<br>
+                                    &nbsp;&nbsp;不足的地方就是，当你刷新页面时，刚才的参数内容会丢失，如果你想查看刚才的完整url，可以在浏览器的历史记录里面找到。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
             </div>
-            <div class="ro" id="json-target" style="padding:0px 25px;over">
-            </div>
+            <!-- / Layout page -->
         </div>
-        <form id="form-save" method="POST"><input type="hidden" value="" id="txt-content" name="content"></form>
+
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
     </div>
-    <br style="clear:both;" />
-</main>
-<link href="./css/jquery.numberedtextarea.css" rel="stylesheet">
-<script src="./js/jquery.min.js"></script>
-<script src="./js/jquery.message.js"></script>
-<script src="./js/jquery.json.js"></script>
-<script src="./js/jquery.xml2json.js"></script>
-<script src="./js/jquery.json2xml.js"></script>
-<script src="./js/json2.js"></script>
-<script src="./js/jsonlint.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/jquery.numberedtextarea.js"></script>
-<script type="text/javascript">
-$('textarea').numberedtextarea();
-var current_json = '';
-var current_json_str = '';
-var xml_flag = false;
-var zip_flag = false;
-var shown_flag = false;
-$('.tip').tooltip();
-function init(){
-    xml_flag = false;
-    zip_flag = false;
-    shown_flag = false;
-    renderLine();
-    $('.xml').attr('style','color:#999;');
-    $('.zip').attr('style','color:#999;');
+    <!-- / Layout wrapper -->
 
-}
-$('#json-src').keyup(function(){
-    init();
-    var content = $.trim($(this).val());
-    var result = '';
-    if (content!='') {
-        //如果是xml,那么转换为json
-        if (content.substr(0,1) === '<' && content.substr(-1,1) === '>') {
-            try{
-                var json_obj = $.xml2json(content);
-                content = JSON.stringify(json_obj);
-            }catch(e){
-                result = '解析错误：<span style="color: #f1592a;font-weight:bold;">' + e.message + '</span>';
-                current_json_str = result;
-                $('#json-target').html(result);
-                return false;
-            }
 
-        }
-        try{
-            current_json = jsonlint.parse(content);
-            current_json_str = JSON.stringify(current_json);
-            //current_json = JSON.parse(content);
-            result = new JSONFormat(content,4).toString();
-        }catch(e){
-            result = '<span style="color: #f1592a;font-weight:bold;">' + e + '</span>';
-            current_json_str = result;
-        }
+    <!-- global.js -->
+    <script src="./r/vendor/js/global.js"></script>
 
-        $('#json-target').html(result);
-    }else{
-        $('#json-target').html('');
-    }
+    <!-- json-format -->
+    <script src="./r/vendor/libs/json-format/json-format.js?202411211140"></script>
 
-});
-$('.xml').click(function(){
-    if (xml_flag) {
-        $('#json-src').keyup();
-    }else{
-        var result = $.json2xml(current_json);
-        $('#json-target').html('<textarea style="width:100%;height:100%;border:0;resize:none;">'+result+'</textarea>');
-        xml_flag = true;
-        $(this).attr('style','color:#15b374;');
-    }
+    <!-- Main JS -->
+    <script src="./r/js/main.js"></script>
 
-});
-$('.shown').click(function(){
-    if (!shown_flag) {
-        renderLine();
-        $('#json-src').attr("style","height:553px;padding:0 10px 10px 40px;border:0;border-right:solid 1px #ddd;border-bottom:solid 1px #ddd;border-radius:0;resize: none; outline:none;");
-        $('#json-target').attr("style","padding:0px 50px;");
-        $('#line-num').show();
-        $('.numberedtextarea-line-numbers').show();
-        shown_flag = true;
-        $(this).attr('style','color:#15b374;');
-    }else{
-        $('#json-src').attr("style","height:553px;padding:0 10px 10px 20px;border:0;border-right:solid 1px #ddd;border-bottom:solid 1px #ddd;border-radius:0;resize: none; outline:none;");
-        $('#json-target').attr("style","padding:0px 20px;");
-        $('#line-num').hide();
-        $('.numberedtextarea-line-numbers').hide();
-        shown_flag = false;
-        $(this).attr('style','color:#999;');
-    }
-});
-function renderLine(){
-    var line_num = $('#json-target').height()/20;
-    $('#line-num').html("");
-    var line_num_html = "";
-    for (var i = 1; i < line_num+1; i++) {
-        line_num_html += "<div>"+i+"<div>";
-    }
-    $('#line-num').html(line_num_html);
-}
-$('.zip').click(function(){
-    if (zip_flag) {
-        $('#json-src').keyup();
-    }else{
-        $('#json-target').html(current_json_str);
-        zip_flag = true;
-        $(this).attr('style','color:#15b374;');
-    }
-
-});
-$('.clear').click(function(){
-     $('#json-src').val('');
-     $('#json-target').html('');
-});
-$('.save').click(function(){
-    var content = JSON.stringify(current_json);
-    $('#txt-content').val(content);
-    $("#form-save").submit();
-});
-$('#json-src').keyup();
-</script>
+    <!-- custom js -->
+    <!-- custom-cms js -->
+    <script src="./r/vendor/libs/format/json-format.js?202411211140"></script>
 </body>
+
 </html>

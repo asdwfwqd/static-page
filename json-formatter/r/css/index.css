@@ -1,0 +1,418 @@
+.card-feature {
+  height: calc(100vh - 166px) !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+}
+
+.card-feature .show-adv {
+  min-height: 90px;
+  flex-shrink: 0;
+  border-bottom-left-radius: var(--bs-card-border-radius);
+  border-bottom-right-radius: var(--bs-card-border-radius);
+  border-top: 1px solid var(--bs-border-color);
+  overflow: hidden;
+  background-color: var(--bs-card-bg);
+  position: relative;
+  z-index: 10;
+}
+
+.card-feature .card-body {
+  padding: 0 !important;
+  height: 0;
+  flex: 1;
+}
+
+.card-feature .card-body > .row {
+  height: 100%;
+  position: relative;
+}
+
+.card-feature .card-body textarea {
+  padding: 1rem 1rem 3rem 1rem;
+  height: 100%;
+  resize: none;
+  box-sizing: border-box;
+  border: none;
+  box-shadow: none;
+  min-height: 100%;
+  width: auto;
+  min-width: 100%;
+}
+
+.card-feature .card-body .input-area {
+  position: relative;
+  height: 100%;
+  display: flex;
+}
+
+.card-feature .card-body .input-area .input-gap {
+  width: 2.5rem;
+  flex-shrink: 0;
+  display: none;
+  height: 100%;
+  overflow: hidden;
+}
+
+.card-feature .card-body .input-area .input-area-container {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin-right: -0.75rem;
+}
+
+.card-feature .card-body .input-area .input-area-container::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.card-feature .card-body .input-area .input-area-container::-webkit-scrollbar-thumb {
+  border-radius: 0;
+}
+
+.card-feature .card-body .input-area .input-area-container::-webkit-scrollbar-thumb:hover {
+  background-color: var(--bs-secondary);
+}
+
+.card-feature .card-body .format-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-feature .card-body .format-area .top-btn-area {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.5rem;
+  flex-wrap: wrap;
+}
+
+.card-feature .card-body .format-area .top-btn-area button {
+  box-shadow: none;
+}
+
+.card-feature .card-body .format-area .top-btn-area .form-check {
+  margin-bottom: 0;
+  margin-left: 0.65rem;
+}
+
+.card-feature .card-body .format-area .top-link-area {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 0.5rem 0rem 1rem;
+  position: relative;
+}
+
+.card-feature .card-body .format-area .top-link-area a {
+  display: block;
+  margin-right: 1rem;
+  color: var(--bs-danger);
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.card-feature .card-body .format-area .top-link-area a:nth-child(2n) {
+  color: var(--bs-primary);
+}
+
+.card-feature .card-body .format-area .top-link-area::after {
+  content: '';
+  position: absolute;
+  left: -0.75rem;
+  right: 0rem;
+  bottom: 0;
+  height: 1px;
+  background-color: var(--bs-border-color);
+}
+
+.card-feature .card-body .format-area .bottom-format-area {
+  flex: 1;
+  position: relative;
+  margin-left: -0.75rem;
+  display: flex;
+  overflow: hidden;
+}
+
+.card-feature .card-body .format-area .bottom-format-area .json-format-area {
+  padding-top: 0.5rem;
+  padding-left: 1.75rem;
+  padding-right: 1rem;
+  padding-bottom: 1.5rem;
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+}
+
+.card-feature .card-body .format-area .bottom-format-area .json-format-area::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.card-feature .card-body .format-area .bottom-format-area .json-format-area::-webkit-scrollbar-thumb {
+  border-radius: 0;
+}
+
+.card-feature .card-body .format-area .bottom-format-area .json-format-area::-webkit-scrollbar-thumb:hover {
+  background-color: var(--bs-secondary);
+}
+
+.card-feature .card-body .format-area .bottom-format-area .editable-tip {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.card-feature .card-body .format-area .bottom-format-area .ti-square-rounded-plus {
+  font-size: 1.125rem;
+  color: var(--bs-info);
+  position: relative;
+  top: -1px;
+}
+
+.card-feature .card-body .format-area .bottom-format-area .ti-square-rounded-minus {
+  font-size: 1.125rem;
+  color: var(--bs-danger);
+  position: relative;
+  top: -1px;
+}
+
+.card-feature .card-body .format-area .bottom-format-area .ps__rail-y {
+  right: 0.25rem !important;
+}
+
+.card-feature .card-body .format-area .bottom-format-area .line-num-container {
+  height: 100%;
+  min-width: 2.5rem;
+  overflow: hidden;
+  border-right: dashed 1px var(--bs-border-color);
+  position: relative;
+  display: none;
+  flex-shrink: 0;
+}
+
+.card-feature .card-body .format-area .bottom-format-area .line-num {
+  left: 0;
+  top: 0;
+  display: flex;
+  position: relative;
+  min-height: 100%;
+  padding-top: 9px;
+  min-width: 2.5rem;
+  text-align: right;
+  align-items: center;
+  flex-direction: column;
+  user-select: none;
+  white-space: nowrap;
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: -2px;
+  flex-shrink: 0;
+}
+
+.card-feature .card-body .format-area .bottom-format-area .ro {
+  white-space: pre-line;
+  word-wrap: break-word;
+}
+
+.card-feature .card-body .format-area .bottom-format-area #hidden-message-box {
+  display: none;
+  margin-bottom: 0;
+}
+
+.card-feature .card-body .format-area .bottom-format-area #hidden-message-box p {
+  margin-bottom: 0;
+  margin-top: 0.4rem;
+}
+
+.card-feature .card-body .format-area .bottom-format-area #hidden-message-box .alert-icon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-feature .card-body .format-area .bottom-format-area .xml-textarea {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  resize: none;
+  padding: 0;
+  outline: none;
+}
+
+.card-feature .card-body .area-drag {
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  bottom: 0;
+  left: calc(41.66666667% - 1px);
+  width: 1px;
+  padding-left: 0;
+  padding-right: 0;
+  transform: translate3d(0, 0, 0);
+  cursor: col-resize !important;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-feature .card-body .area-drag span {
+  display: none;
+  position: relative;
+  z-index: 2;
+  font-size: 1rem;
+  background-color: var(--bs-card-bg);
+  padding: 0.25rem 0;
+  pointer-events: none;
+}
+
+.card-feature .card-body .area-drag::before {
+  content: '';
+  background-color: var(--bs-border-color);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  left: 0px;
+}
+
+.card-feature .card-body .area-drag.on::before {
+  background-color: var(--bs-primary);
+}
+
+.card-feature .card-body .area-drag.on {
+  color: var(--bs-primary);
+}
+
+.format-fullscreen {
+  overflow: hidden;
+}
+
+.format-fullscreen .card-feature {
+  position: fixed;
+  z-index: 1090;
+  left: 0;
+  width: 100%;
+  height: 100% !important;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.format-fullscreen .card-feature .show-adv {
+  display: none;
+}
+
+.format-fullscreen .show-hide-adv {
+  display: none !important;
+}
+
+.numberedtextarea-wrapper {
+  height: 100%;
+  position: relative;
+}
+
+.numberedtextarea-wrapper .numberedtextarea-line-numbers {
+  position: absolute;
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  width: 2.5rem !important;
+  text-align: center;
+  background-color: transparent;
+  color: var(--bs-border-color);
+  display: none;
+}
+
+.textarea__lines {
+  padding-top: 17.5px !important;
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  white-space: nowrap;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  width: 2.5rem !important;
+  text-align: right;
+  background-color: transparent;
+  display: none;
+  user-select: none;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Courier New', Courier, monospace !important;
+  letter-spacing: -2px !important;
+}
+
+@media (max-width: 1200px) {
+  .card-feature {
+    height: calc(100vh - 110px) !important;
+  }
+}
+
+@media (max-width: 768.88px) {
+  .card-feature .card-body .input-area{
+    height: 10vh;
+  }
+  .card-feature .card-body .input-area .input-area-container {
+    margin-right: 0;
+  }
+  .card-feature {
+    height: auto !important;
+  }
+  .card-feature .card-body .area-drag {
+    display: none;
+    bottom: 0;
+    left: 1.5rem;
+    right: 1.5rem;
+    top: auto;
+    height: 24px;
+    width: auto;
+  }
+  .card-feature .card-body .area-drag::before {
+    right: 0;
+    left: 0;
+    top: 11px;
+    bottom: auto;
+    width: 100%;
+    height: 1px;
+  }
+  .card-feature .card-body .area-drag span {
+    transform: rotate(90deg);
+  }
+  .card-feature .card-body .format-area {
+    position: relative;
+    margin-top: 12px;
+    display: block;
+  }
+  .card-feature .card-body .format-area::before {
+    position: absolute;
+    content: '';
+    height: 1px;
+    left: 1.5rem;
+    right: 1.5rem;
+    top: 0;
+    background-color: var(--bs-border-color);
+  }
+  .card-feature .card-body .format-area .top-link-area::after {
+    left: 0.75rem;
+    right: 0.75rem;
+  }
+  .card-feature .card-body .format-area .bottom-format-area {
+    height: 50vh;
+    padding-left: 1rem;
+    margin-left: 0;
+  }
+}
