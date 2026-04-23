@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>冰箱在线激活器</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta charset="utf-8">
+		<link rel="shortcut icon" href="./img/favicon-icebox.ico">
+	
+		<link href="https://cdn.staticfile.org/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+		<script src="js/webadb.js?as"></script>
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script src="js/main.js?v=15"></script>
+	</head>
+	<body>
+	
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">web1n</a>
+				     <button type="button" class="navbar-toggle" data-toggle="collapse"	data-target="#collapse-nav">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="collapse-nav">
+					<ul class="nav navbar-nav">
+						<li><a href="https://adb.http.gs/">Adb 在线执行器</a></li>
+						<li><a href="https://adb.http.gs/stopapp.html">小黑屋激活器</a></li>
+						<li class="active"><a href="#">冰箱激活器</a></li>
+					</ul>
+				
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								我的软件
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="https://stopapp.https.gs/">小黑屋</a></li>
+								<li><a href="https://www.coolapk.com/apk/com.web1n.permissiondog">权限狗</a></li>
+								<li><a href="#">aF (beta)</a></li>
+								<li class="divider"></li>
+								<li><a href="https://adb.http.gs/">Adb 在线执行器</a></li>
+								<li><a href="#">科大校园网</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	
+		<div class="container" style="padding-top: 72px">
+			<div class="alert alert-danger" id="nowebusb">
+				<strong>警告！</strong> 您的浏览器不支持 <a href="https://wicg.github.io/webusb">WebUSB API</a> ! 如果您是 Chrome 用户, 请确认浏览器版本为 61 及以上. <br>
+				<a href="https://www.google.cn/intl/zh-CN/chrome/">下载最新版本 Chrome</a>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-8">
+					<div class="jumbotron">
+						<h2>冰箱在线激活器
+							<small>
+								<span class="label label-primary">beta</span>
+							</small>
+						</h2>
+						<p>
+							本工具使用 <a href="https://developer.android.com/studio/command-line/adb.html" target="_blank">ADB</a> 协议及
+							<a href="https://wicg.github.io/webusb" target="_blank">WebUSB</a> 来通过数据线连接你的 Android 设备.<br>
+							整个过程在本地进行, 不会进行在线数据传输. <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changeLog">更新日志</button>
+						</p>
+					</div>
+				</div>
+
+				<div class="col-sm-4">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h3 class="panel-title">如何使用?</h3>
+						</div>
+						<div class="panel-body">
+							如果您是安卓手机, 那么可以使用 otg 数据线连接另一个安卓设备.<br>
+							如果您是电脑, 那么直接连接安卓设备即可(需要安装驱动, 不需要安装 adb).<br><br>	
+							点击下方"连接到设备"后在弹出的对话框内选中您的设备, 然后在手机端确认授权后就可以进行激活操作了.<br><br>
+							在激活或使用中遇到任何问题, 可以查阅 <a href="https://iceboxdoc.catchingnow.cn/" target="_blank">冰箱 Ice Box 教程大全</a>.
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">设备选项</h3>
+				</div>
+				<div class="panel-body">
+					<button class="btn btn-success" onclick="connect()">连接到设备</button>
+					<button class="btn btn btn-danger" onclick="disconnect()">断开连接</button>
+			
+					<div class="pull-right">
+						当前连接设备: <span class="badge" id="device_name"></span>
+					</div>
+				</div>
+				<div class="panel-footer">
+					点击以上按钮进行设备的连接与断开(碎碎念)
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">激活选项</h3>
+				</div>
+				<div class="panel-body">
+					<p>
+						<button type="button" class="btn btn-default" onclick="exec_shell('sh /sdcard/Android/data/com.catchingnow.icebox/files/start.sh')">激活冰箱普通 Adb 模式</button>
+						<button type="button" class="btn btn-default" onclick="setDeviceOwner('com.catchingnow.icebox/.receiver.DPMReceiver')">激活冰箱设备管理员</button>
+					</p>
+					<p><span class="badge">tips</span> 设置冰箱设备管理员前会自动移除所有账号与用户</p>
+					<p>在激活或使用中遇到任何问题, 可以查阅 <a href="https://iceboxdoc.catchingnow.cn/" target="_blank">冰箱 Ice Box 教程大全</a>.</p>
+				</div>
+			</div>
+
+			<div class="panel panel-info" id="exec-result">
+				<div class="panel-heading">
+					<h3 class="panel-title">执行结果</h3>
+				</div>
+				<div class="panel-body">
+					<div class="progress" id="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" 
+							aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+						</div>
+					</div>
+				
+					<pre id="log">这里是执行结果~~~</pre>
+				</div>
+				<div class="panel-footer">
+					执行结果会显示在上面, 把它当作是虚拟终端就好啦
+				</div>
+			</div>
+		</div>
+		
+		<div class="jumbotron text-center" style="margin-bottom:0">
+			<p>copyright 2020 web1n.</p>
+		</div>
+		
+		<div class="modal fade" id="changeLog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Adb 在线执行器</h4>
+					</div>
+					<div class="modal-body">
+						<p>版本修改记录</p>
+						<code>
+							v3:<br>
+							设置设备管理员前会自动移除所有账号与用户.<br>
+							v2:<br>
+							增加鸡肋的应用管理功能.<br>
+							支持安装 apk 功能.<br>
+							v1:<br>
+							初始版本.<br>
+						</code>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</body>
+</html>

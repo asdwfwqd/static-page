@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Adb 在线执行器</title>
+  <link
+    href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABMLAAATCwAAAAAAAAAAAAD///8A////AP///wD///8A////AFfCeP9Xwnj/////AP///wBXwnj/V8J4/////wD///8A////AP///wD///8A////AP///wD///8A////AP///wBXwnj/V8J4/////wD///8AV8J4/1fCeP////8A////AP///wD///8A////AP///wD///8A////AP///wD///8AV8J4/1fCeP////8A////AFfCeP9Xwnj/////AP///wD///8A////AP///wD///8A////AP///wBXwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/////AP///wD///8A////AP///wD///8AV8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/////wD///8A////AFfCeP9Xwnj/////AFfCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP////8AV8J4/1fCeP9Xwnj/V8J4/////wBXwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/////AFfCeP9Xwnj/V8J4/1fCeP////8AV8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/////wBXwnj/V8J4/1fCeP9Xwnj/////AFfCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP////8AV8J4/1fCeP9Xwnj/V8J4/////wBXwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/////AFfCeP9Xwnj/////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AFfCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP////8A////AP///wD///8A////AP///wBXwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/////AP///wD///8A////AP///wD///8A////AFfCeP////8AV8J4/1fCeP9Xwnj/V8J4/////wBXwnj/////AP///wD///8A////AP///wD///8A////AP///wD///8AV8J4/1fCeP9Xwnj/V8J4/1fCeP9Xwnj/////AP///wD///8A////AP///wD///8A////AP///wD///8AV8J4/////wD///8A////AP///wD///8A////AFfCeP////8A////AP///wD///8A+Z8AAPmfAAD5nwAA4AcAAOAHAAAgBAAAIAQAACAEAAAgBAAAIAQAAP//AADgBwAA4AcAAPQvAAD4HwAA9+8AAA=="
+    rel="shortcut icon">
+  <meta content="在线 adb, adb, webadb, 小黑屋, 冰箱, 黑阈, Shizuku, stopapp, icebox, brevent" name="keywords">
+  <meta content="使用在线执行器简单激活你的小黑屋、冰箱等需要 adb 权限的应用" name="description">
+  <script type="module" crossorigin src="./assets/index-c63e7e56.js"></script>
+  <link rel="stylesheet" href="./assets/index-fa6193c6.css">
+</head>
+
+<body>
+  <div class="container pt-5">
+    <div class="row justify-content-center gy-2" x-cloak x-data="ADB">
+      <div class="col-sm-10 col-md-8 col-lg-5">
+        <h3>在线执行工具 <span class="badge bg-secondary">beta</span></h3>
+        <div class="alert alert-danger mb-2" x-show="!isSupported()">此浏览器不支持 WebUSB API，请使用最新版本 <a href="https://www.google.cn/intl/zh-CN/chrome/">Chrome 浏览器</a></div><template x-if="message">
+          <div class="alert alert-secondary mb-2"><span x-text="message"></span></div>
+        </template><template x-if="result">
+          <div @closed-bs-alert.dot.once="result = null;" class="alert alert-primary alert-dismissible fade show mb-2"><span x-text="result"></span> <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert"></button></div>
+        </template>
+        <div class="card">
+          <div class="card-body">
+            <div class="row gx-3 gy-2 pb-3">
+              <div class="col-md-8"><select :disabled="processing" aria-label="choose app" class="form-select shadow-none" x-model="checked"><template x-for="(shell, index) in shells">
+                    <option :selected="index === 0" :value="index" x-text="shell.name"></option>
+                  </template></select></div>
+              <div class="col-md-4"><button class="btn btn-primary w-100 shadow-none" :data-loading="processing" :class="processing ? 'btn-danger' : 'btn-primary'" @click="processing ? stop() : active()"
+                  x-text="processing ? '停止' : '点击激活'">点击激活</button></div><small class="text-muted">当前设备： <label x-text="productName"></label><template x-if="supportForget"><button :disabled="processing" @click="forget()"
+                    class="btn btn-sm btn-link">忘记此设备</button></template></small>
+            </div><template x-if="!!shellShow">
+              <div><small>将执行以下命令<br></small><code class="text-break" x-text="shellShow"></code></div>
+            </template><template x-if="!shellShow">
+              <div class="form-floating"><input :disabled="processing" @keydown.enter="active()" class="form-control shadow-none" id="shell" placeholder="shell" required x-model="shell" x-ref="shell"> <label for="shell">输入非交互型指令，如：uname -a</label>
+              </div>
+            </template>
+          </div>
+        </div>
+        <div class="py-5 small text-center text-muted">
+          <div>Windows：请为 ADB 安装 <a href="https://developer.android.google.cn/studio/run/oem-usb" target="_blank">驱动程序</a>； Ubuntu：请配置 <a target="_blank" href="https://developer.android.google.cn/studio/run/device">udev 规则</a></div>
+          <div class="font-monospace pt-3"><span x-text="`© 2020 - ${new Date().getFullYear()}`"></span> <a href="https://https.gs/">web1n</a><br><span x-text="`build time: ${buildTime}`"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

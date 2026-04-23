@@ -5,13 +5,12 @@ static page of [asdwfwqd.com](https://asdwfwqd.com)
 -   [x] Certificate with [Let’s Encrypt](https://letsencrypt.org/)
 -   [x] Add to [HSTS Preload List Submission](https://hstspreload.org/?domain=asdwfwqd.com)
 -   [x] Two mirror sites
-    -   [Tokyo](https://tk.asdwfwqd.com)
     -   [Silicon Valley](https://sv.asdwfwqd.com)
+    -   [Toronto](https://tn.asdwfwqd.com)
 
 ### Catalog
 
 -   [WebStackPage](https://asdwfwqd.com/webstackpage)
--   [轮渡](https://asdwfwqd.com/ferry)
 -   himawari8
     -   [thumbnail](https://asdwfwqd.com/himawari8?resolution=1d)
     -   [550×550](https://asdwfwqd.com/himawari8?resolution=1d)
@@ -25,11 +24,10 @@ static page of [asdwfwqd.com](https://asdwfwqd.com)
 -   [SPACEX ISS Docking Simulator](https://asdwfwqd.com/iss-sim)
 -   [Json在线解析及格式化验证](https://asdwfwqd.com/json-formatter)
 -   [强密码生成器](https://asdwfwqd.com/password-generator)
--   [SubPlayer](https://asdwfwqd.com/subplayer)
 -   [Trump Executive Order Generator](https://asdwfwqd.com/trump-generator)
+-   [Web Multiband Simulator](https://asdwfwqd.com/web-multiband-simulator)
 -   [weird fonts](https://asdwfwqd.com/weird-fonts)
 -   [h5ai](https://asdwfwqd.com/download)
--   [Game](https://asdwfwqd.com/game)
 -   [SlowRoads](https://asdwfwqd.com/slowroads)
 
 ### Others
