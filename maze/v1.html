@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>儿童智能迷宫生成器 (20x20)</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f7f9fa;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .control-panel {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: background 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button.btn-ans {
+            background-color: #e67e22;
+        }
+
+        button.btn-ans:hover {
+            background-color: #d35400;
+        }
+
+        button.btn-down {
+            background-color: #2ecc71;
+        }
+
+        button.btn-down:hover {
+            background-color: #27ae60;
+        }
+
+        .canvas-container {
+            margin: 20px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: inline-block;
+        }
+
+        canvas {
+            display: block;
+            /* border: 4px solid #2c3e50; */
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🧩 20×20 专属趣味迷宫</h1>
+    <div class="subtitle">左上角为入口，右下角为出口。每次点击按钮都会生成一个全新的绝对可解迷宫！</div>
+
+    <div class="control-panel">
+        <button onclick="initMaze()">🎲 生成新迷宫</button>
+        <button class="btn-ans" onclick="toggleAnswer()">👁️ 显示/隐藏答案</button>
+        <button class="btn-down" onclick="downloadMaze()">💾 下载迷宫图片</button>
+    </div>
+
+    <div class="canvas-container">
+        <canvas id="mazeCanvas"></canvas>
+    </div>
+
+    <script>
+        const cols = 20;
+        const rows = 20;
+        const cellSize = 20; // 每个格子的像素大小
+
+        // 迷宫画布实际像素大小 (包含墙壁)
+        // 20个格子需要 (20 * 2 + 1) = 41 个网格点
+        const gridWidth = cols * 2 + 1;
+        const gridHeight = rows * 2 + 1;
+
+        let grid = [];
+        let solutionPath = [];
+        let showSolution = false;
+
+        const canvas = document.getElementById('mazeCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = gridWidth * cellSize;
+        canvas.height = gridHeight * cellSize;
+
+        // 初始化并生成迷宫
+        function initMaze() {
+            showSolution = false;
+
+            // 1代表墙，0代表路
+            grid = Array(gridHeight).fill().map(() => Array(gridWidth).fill(1));
+
+            // 深度优先生成算法 (DFS)
+            let stack = [];
+            let visited = Array(gridHeight).fill().map(() => Array(gridWidth).fill(false));
+
+            let startX = 1, startY = 1;
+            grid[startY][startX] = 0;
+            visited[startY][startX] = true;
+            stack.push({ x: startX, y: startY });
+
+            while (stack.length > 0) {
+                let current = stack[stack.length - 1];
+                let neighbors = [];
+
+                let dirs = [
+                    { x: 0, y: -2 }, // 上
+                    { x: 2, y: 0 },  // 右
+                    { x: 0, y: 2 },  // 下
+                    { x: -2, y: 0 }  // 左
+                ];
+
+                for (let dir of dirs) {
+                    let nx = current.x + dir.x;
+                    let ny = current.y + dir.y;
+
+                    if (nx > 0 && nx < gridWidth && ny > 0 && ny < gridHeight && !visited[ny][nx]) {
+                        neighbors.push({ x: nx, y: ny });
+                    }
+                }
+
+                if (neighbors.length > 0) {
+                    // 随机选一个邻居
+                    let next = neighbors[Math.floor(Math.random() * neighbors.length)];
+
+                    // 打通当前格子和邻居之间的墙
+                    grid[(current.y + next.y) / 2][(current.x + next.x) / 2] = 0;
+                    grid[next.y][next.x] = 0;
+
+                    visited[next.y][next.x] = true;
+                    stack.push(next);
+                } else {
+                    stack.pop();
+                }
+            }
+
+            // 设置入口和出口
+            grid[1][0] = 0; // 左上入口
+            grid[gridHeight - 2][gridWidth - 1] = 0; // 右下出口
+
+            // 寻找标准解法路径 (BFS广度优先搜索寻路)
+            findSolution();
+
+            // 渲染到画布
+            draw();
+        }
+
+        // 自动寻找从入口到出口的唯一解
+        function findSolution() {
+            let queue = [{ x: 0, y: 1, path: [{ x: 0, y: 1 }] }];
+            let visited = Array(gridHeight).fill().map(() => Array(gridWidth).fill(false));
+            visited[1][0] = true;
+
+            while (queue.length > 0) {
+                let current = queue.shift();
+
+                if (current.x === gridWidth - 1 && current.y === gridHeight - 2) {
+                    solutionPath = current.path;
+                    return;
+                }
+
+                let dirs = [{ x: 0, y: -1 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
+                for (let dir of dirs) {
+                    let nx = current.x + dir.x;
+                    let ny = current.y + dir.y;
+
+                    if (nx >= 0 && nx < gridWidth && ny >= 0 && ny < gridHeight) {
+                        if (grid[ny][nx] === 0 && !visited[ny][nx]) {
+                            visited[ny][nx] = true;
+                            queue.push({ x: nx, y: ny, path: [...current.path, { x: nx, y: ny }] });
+                        }
+                    }
+                }
+            }
+        }
+
+        // 绘制迷宫
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 绘制墙壁和道路
+            for (let y = 0; y < gridHeight; y++) {
+                for (let x = 0; x < gridWidth; x++) {
+                    if (grid[y][x] === 1) {
+                        ctx.fillStyle = '#2c3e50';
+                        ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                    }
+                }
+            }
+            for (let y = 0; y < gridHeight; y++) {
+                for (let x = 0; x < gridWidth; x++) {
+                    if (grid[y][x] === 0) {
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(x * cellSize - 7, y * cellSize - 7, cellSize + 14, cellSize + 14);
+                    }
+                }
+            }
+
+            // 标注入口和出口的文字或颜色提示
+            // ctx.fillStyle = '#2ecc71'; // 绿色代表开始
+            // ctx.fillRect(0, cellSize, cellSize, cellSize);
+            // ctx.fillStyle = '#e74c3c'; // 红色代表结束
+            // ctx.fillRect((gridWidth - 1) * cellSize, (gridHeight - 2) * cellSize, cellSize, cellSize);
+
+            // 如果开启了显示答案，绘制解题路径
+            if (showSolution) {
+                ctx.lineWidth = cellSize / 3;
+                ctx.strokeStyle = '#e67e22'; // 答案路径颜色：橙色
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.beginPath();
+
+                if (solutionPath.length > 0) {
+                    ctx.moveTo(solutionPath[0].x * cellSize + cellSize / 2, solutionPath[0].y * cellSize + cellSize / 2);
+                    for (let i = 1; i < solutionPath.length; i++) {
+                        ctx.lineTo(solutionPath[i].x * cellSize + cellSize / 2, solutionPath[i].y * cellSize + cellSize / 2);
+                    }
+                }
+                ctx.stroke();
+            }
+        }
+
+        // 切换答案显示状态
+        function toggleAnswer() {
+            showSolution = !showSolution;
+            draw();
+        }
+
+        // 下载图片功能
+        function downloadMaze() {
+            const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            const link = document.createElement('a');
+            link.download = `迷宫_${Date.now()}.png`;
+            link.href = image;
+            link.click();
+        }
+
+        // 页面加载时自动生成第一个迷宫
+        window.onload = initMaze;
+    </script>
+</body>
+
+</html>

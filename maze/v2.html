@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>趣味多岔路儿童迷宫 (20x20)</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .control-panel {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: background 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button.btn-ans {
+            background-color: #e67e22;
+        }
+
+        button.btn-ans:hover {
+            background-color: #d35400;
+        }
+
+        button.btn-down {
+            background-color: #2ecc71;
+        }
+
+        button.btn-down:hover {
+            background-color: #27ae60;
+        }
+
+        .canvas-container {
+            margin: 20px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: inline-block;
+        }
+
+        canvas {
+            display: block;
+            /* border: 4px solid #2c3e50; */
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🧩 20×20 趣味多岔路迷宫</h1>
+    <div class="subtitle">全新算法优化：大幅增加了迷惑性岔路，缩短了冗长路线，更适合小朋友动脑筋！</div>
+
+    <div class="control-panel">
+        <button onclick="initMaze()">🎲 生成新迷宫</button>
+        <button class="btn-ans" onclick="toggleAnswer()">👁️ 显示/隐藏答案</button>
+        <button class="btn-down" onclick="downloadMaze()">💾 下载迷宫图片</button>
+    </div>
+
+    <div class="canvas-container">
+        <canvas id="mazeCanvas"></canvas>
+    </div>
+
+    <script>
+        const cols = 20;
+        const rows = 20;
+        const cellSize = 25; // 稍微放大了格子尺寸，画面更清晰
+
+        const gridWidth = cols * 2 + 1;
+        const gridHeight = rows * 2 + 1;
+
+        let grid = [];
+        let solutionPath = [];
+        let showSolution = false;
+
+        const canvas = document.getElementById('mazeCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = gridWidth * cellSize;
+        canvas.height = gridHeight * cellSize;
+
+        // 初始化并生成迷宫 (改用改良版 Prim 算法以增加分叉)
+        function initMaze() {
+            showSolution = false;
+
+            // 1代表墙，0代表路
+            grid = Array(gridHeight).fill().map(() => Array(gridWidth).fill(1));
+
+            // 存储待处理的墙壁列表
+            let walls = [];
+
+            // 起点
+            let startX = 1, startY = 1;
+            grid[startY][startX] = 0;
+
+            // 将起点周围的墙加入列表
+            addWalls(startX, startY, walls);
+
+            while (walls.length > 0) {
+                // 随机选一面墙弹出（Prim算法的核心，带来随机发散的岔路）
+                let randIdx = Math.floor(Math.random() * walls.length);
+                let wall = walls[randIdx];
+                walls.splice(randIdx, 1);
+
+                let px = wall.px; // 桥梁格子
+                let py = wall.py;
+                let nx = wall.nx; // 目标格子
+                let ny = wall.ny;
+
+                // 如果目标格子还没有被访问过（还是墙）
+                if (grid[ny][nx] === 1) {
+                    // 打通墙壁和目标格子
+                    grid[py][px] = 0;
+                    grid[ny][nx] = 0;
+
+                    // 把新拓展格子周围的墙再加进来
+                    addWalls(nx, ny, walls);
+                }
+            }
+
+            // 设置入口和出口
+            grid[1][0] = 0;
+            grid[gridHeight - 2][gridWidth - 1] = 0;
+
+            // 自动寻路
+            findSolution();
+
+            // 渲染
+            draw();
+        }
+
+        // 辅助函数：将一个格子周围的所有“墙壁桥梁”加入待选列表
+        function addWalls(x, y, walls) {
+            let dirs = [
+                { dx: 0, dy: -2 }, // 上
+                { dx: 2, dy: 0 },  // 右
+                { dx: 0, dy: 2 },  // 下
+                { dx: -2, dy: 0 }  // 左
+            ];
+
+            for (let dir of dirs) {
+                let nx = x + dir.dx;
+                let ny = y + dir.dy;
+
+                if (nx > 0 && nx < gridWidth && ny > 0 && ny < gridHeight) {
+                    if (grid[ny][nx] === 1) {
+                        walls.push({
+                            px: x + dir.dx / 2, // 两个格子中间的墙
+                            py: y + dir.dy / 2,
+                            nx: nx,             // 跨过去的下一个格子
+                            ny: ny
+                        });
+                    }
+                }
+            }
+        }
+
+        // 广度优先搜索 (BFS) 寻找解法
+        function findSolution() {
+            let queue = [{ x: 0, y: 1, path: [{ x: 0, y: 1 }] }];
+            let visited = Array(gridHeight).fill().map(() => Array(gridWidth).fill(false));
+            visited[1][0] = true;
+
+            while (queue.length > 0) {
+                let current = queue.shift();
+
+                if (current.x === gridWidth - 1 && current.y === gridHeight - 2) {
+                    solutionPath = current.path;
+                    return;
+                }
+
+                let dirs = [{ x: 0, y: -1 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
+                for (let dir of dirs) {
+                    let nx = current.x + dir.x;
+                    let ny = current.y + dir.y;
+
+                    if (nx >= 0 && nx < gridWidth && ny >= 0 && ny < gridHeight) {
+                        if (grid[ny][nx] === 0 && !visited[ny][nx]) {
+                            visited[ny][nx] = true;
+                            queue.push({ x: nx, y: ny, path: [...current.path, { x: nx, y: ny }] });
+                        }
+                    }
+                }
+            }
+        }
+
+        // 绘制迷宫
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let y = 0; y < gridHeight; y++) {
+                for (let x = 0; x < gridWidth; x++) {
+                    if (grid[y][x] === 1) {
+                        ctx.fillStyle = '#2c3e50';
+                        ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                    }
+                }
+            }
+            for (let y = 0; y < gridHeight; y++) {
+                for (let x = 0; x < gridWidth; x++) {
+                    if (grid[y][x] === 0) {
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(x * cellSize - 7, y * cellSize - 7, cellSize + 14, cellSize + 14);
+                    }
+                }
+            }
+
+            // 入口和出口标志
+            // ctx.fillStyle = '#2ecc71';
+            // ctx.fillRect(0, cellSize, cellSize, cellSize);
+            // ctx.fillStyle = '#e74c3c';
+            // ctx.fillRect((gridWidth - 1) * cellSize, (gridHeight - 2) * cellSize, cellSize, cellSize);
+
+            // 绘制橙色答案路径
+            if (showSolution) {
+                ctx.lineWidth = cellSize / 3;
+                ctx.strokeStyle = '#e67e22';
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.beginPath();
+
+                if (solutionPath.length > 0) {
+                    ctx.moveTo(solutionPath[0].x * cellSize + cellSize / 2, solutionPath[0].y * cellSize + cellSize / 2);
+                    for (let i = 1; i < solutionPath.length; i++) {
+                        ctx.lineTo(solutionPath[i].x * cellSize + cellSize / 2, solutionPath[i].y * cellSize + cellSize / 2);
+                    }
+                }
+                ctx.stroke();
+            }
+        }
+
+        function toggleAnswer() {
+            showSolution = !showSolution;
+            draw();
+        }
+
+        function downloadMaze() {
+            const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            const link = document.createElement('a');
+            link.download = `趣味多岔路迷宫_${Date.now()}.png`;
+            link.href = image;
+            link.click();
+        }
+
+        window.onload = initMaze;
+    </script>
+</body>
+
+</html>

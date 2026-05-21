@@ -11,14 +11,24 @@ static page of [asdwfwqd.com](https://asdwfwqd.com)
 ### Catalog
 
 -   [WebStackPage](https://asdwfwqd.com/webstackpage)
--   himawari8
-    -   [thumbnail](https://asdwfwqd.com/himawari8?resolution=1d)
-    -   [550×550](https://asdwfwqd.com/himawari8?resolution=1d)
-    -   [1100×1100](https://asdwfwqd.com/himawari8?resolution=2d)
-    -   [2200×2200](https://asdwfwqd.com/himawari8?resolution=4d)
-    -   ~~4400×4400~~(offline due to performance problem)
-    -   ~~8800×8800~~(offline due to performance problem)
-    -   ~~11000×11000~~(offline due to performance problem)
+-   mantou
+    -   himawari8
+        -   [thumbnail](https://asdwfwqd.com/mantou?type=himawari8&resolution=1d)
+        -   [550×550](https://asdwfwqd.com/mantou?type=himawari8&resolution=1d)
+        -   [1100×1100](https://asdwfwqd.com/mantou?type=himawari8&resolution=2d)
+        -   [2200×2200](https://asdwfwqd.com/mantou?type=himawari8&resolution=4d)
+        -   ~~4400×4400~~(offline due to performance problem)
+        -   ~~8800×8800~~(offline due to performance problem)
+        -   ~~11000×11000~~(offline due to performance problem)
+    -   go18
+        -   [Advanced Baseline Imager (ABI)](https://asdwfwqd.com/mantou?type=go18abi&resolution=1808)
+        -   [Solar Ultraviolet Imager (SUVI)](https://asdwfwqd.com/mantou?type=go18suvi&resolution=4)
+    -   go19
+        -   [Advanced Baseline Imager (ABI)](https://asdwfwqd.com/mantou?type=go19abi&resolution=1808)
+        -   [Solar Ultraviolet Imager (SUVI)](https://asdwfwqd.com/mantou?type=go19suvi&resolution=4)
+-   迷宫
+    -   [v1](https://asdwfwqd.com/maze/v1)
+    -   [v2](https://asdwfwqd.com/maze/v2)
 -   [冰箱在线激活器V1](https://asdwfwqd.com/iceboxV1)
 -   [冰箱在线激活器V2](https://asdwfwqd.com/iceboxV2)
 -   [SPACEX ISS Docking Simulator](https://asdwfwqd.com/iss-sim)
