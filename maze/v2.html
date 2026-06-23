@@ -3,11 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>趣味多岔路儿童迷宫 (20x20)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>儿童智能迷宫生成器 (20x20)</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #f4f7f6;
+            background-color: #f7f9fa;
             color: #333;
             text-align: center;
             padding: 20px;
@@ -46,6 +47,14 @@
             background-color: #2980b9;
         }
 
+        button.btn-clr {
+            background-color: #ff4757;
+        }
+
+        button.btn-clr:hover {
+            background-color: #e84118;
+        }
+
         button.btn-ans {
             background-color: #e67e22;
         }
@@ -62,35 +71,82 @@
             background-color: #27ae60;
         }
 
+        .container {
+            position: relative;
+        }
+
         .canvas-container {
+            position: relative;
+            width: 0px;
+            height: 0px;
             margin: 20px auto;
             background: white;
-            padding: 15px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             display: inline-block;
         }
 
         canvas {
-            display: block;
-            /* border: 4px solid #2c3e50; */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        #hero {
+            position: relative;
+            left: 0;
+            bottom: 0;
+            width: auto;
+            height: 100px;
+            z-index: 0;
+        }
+
+        #enemy {
+            position: relative;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: 100px;
+            z-index: 0;
+        }
+
+        #mazeCanvas {
+            background-color: #ffffff;
+            /* 底色 */
+            z-index: 1;
+        }
+
+        #drawingCanvas {
+            z-index: 2;
+            cursor: crosshair;
+            /* 防止手机上划动时导致整个页面被拖动或缩放 */
+            touch-action: none;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>🧩 20×20 趣味多岔路迷宫</h1>
-    <div class="subtitle">全新算法优化：大幅增加了迷惑性岔路，缩短了冗长路线，更适合小朋友动脑筋！</div>
+    <h1>🧩 20×20 专属趣味迷宫</h1>
+    <div class="subtitle">左上角为入口，右下角为出口。每次点击按钮都会生成一个全新的绝对可解迷宫！</div>
 
     <div class="control-panel">
         <button onclick="initMaze()">🎲 生成新迷宫</button>
+        <button class="btn-clr" onclick="clearDrawing()">🧽清除笔迹</button>
         <button class="btn-ans" onclick="toggleAnswer()">👁️ 显示/隐藏答案</button>
         <button class="btn-down" onclick="downloadMaze()">💾 下载迷宫图片</button>
     </div>
 
-    <div class="canvas-container">
-        <canvas id="mazeCanvas"></canvas>
+    <div class="container">
+        <img id="hero">
+        <div class="canvas-container">
+            <canvas id="mazeCanvas"></canvas>
+            <canvas id="drawingCanvas"></canvas>
+        </div>
+        <img id="enemy">
     </div>
 
     <script>
@@ -98,6 +154,8 @@
         const rows = 20;
         const cellSize = 20; // 每个格子的像素大小
 
+        // 迷宫画布实际像素大小 (包含墙壁)
+        // 20个格子需要 (20 * 2 + 1) = 41 个网格点
         const gridWidth = cols * 2 + 1;
         const gridHeight = rows * 2 + 1;
 
@@ -105,89 +163,121 @@
         let solutionPath = [];
         let showSolution = false;
 
+        // 迷宫 Canvas
         const canvas = document.getElementById('mazeCanvas');
         const ctx = canvas.getContext('2d');
 
         canvas.width = gridWidth * cellSize;
         canvas.height = gridHeight * cellSize;
 
-        // 初始化并生成迷宫 (改用改良版 Prim 算法以增加分叉)
+        // 画板 Canvas
+        const drawingCanvas = document.getElementById('drawingCanvas');
+        const dCtx = drawingCanvas.getContext('2d');
+
+        drawingCanvas.width = canvas.width
+        drawingCanvas.height = canvas.height
+        // 设置画笔样式
+        dCtx.strokeStyle = '#e74c3c'; // 画笔颜色（单色）
+        dCtx.lineWidth = 5;           // 画笔粗细
+        dCtx.lineCap = 'round';       // 让线条转弯和末端更圆滑
+        dCtx.lineJoin = 'round';
+
+        let isDrawing = false;
+
+        // 背景
+        const hero = document.getElementById('hero');
+        hero.style.bottom = (canvas.height - 40) + 'px';
+
+        // 父容器
+        const container = document.querySelector('.canvas-container');
+        container.style.width = canvas.width + 'px';
+        container.style.height = canvas.height + 'px';
+
+        // 图片范围
+        function getRandomNum(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // 随机角色
+        function randomImg(type) {
+            switch (type) {
+                case "hero":
+                    const heroImg = document.getElementById('hero');
+                    heroImg.src = `./img/hero_${getRandomNum(1, 9)}.png`;
+                    break;
+                case "enemy":
+                    const enemyImg = document.getElementById('enemy');
+                    enemyImg.src = `./img/enemy_${getRandomNum(1, 9)}.png`;
+                    break;
+            }
+        }
+
+        // 初始化并生成迷宫
         function initMaze() {
+            randomImg("hero");
+            randomImg("enemy");
+
             showSolution = false;
 
             // 1代表墙，0代表路
             grid = Array(gridHeight).fill().map(() => Array(gridWidth).fill(1));
 
-            // 存储待处理的墙壁列表
-            let walls = [];
+            // 深度优先生成算法 (DFS)
+            let stack = [];
+            let visited = Array(gridHeight).fill().map(() => Array(gridWidth).fill(false));
 
-            // 起点
             let startX = 1, startY = 1;
             grid[startY][startX] = 0;
+            visited[startY][startX] = true;
+            stack.push({ x: startX, y: startY });
 
-            // 将起点周围的墙加入列表
-            addWalls(startX, startY, walls);
+            while (stack.length > 0) {
+                let current = stack[stack.length - 1];
+                let neighbors = [];
 
-            while (walls.length > 0) {
-                // 随机选一面墙弹出（Prim算法的核心，带来随机发散的岔路）
-                let randIdx = Math.floor(Math.random() * walls.length);
-                let wall = walls[randIdx];
-                walls.splice(randIdx, 1);
+                let dirs = [
+                    { x: 0, y: -2 }, // 上
+                    { x: 2, y: 0 },  // 右
+                    { x: 0, y: 2 },  // 下
+                    { x: -2, y: 0 }  // 左
+                ];
 
-                let px = wall.px; // 桥梁格子
-                let py = wall.py;
-                let nx = wall.nx; // 目标格子
-                let ny = wall.ny;
+                for (let dir of dirs) {
+                    let nx = current.x + dir.x;
+                    let ny = current.y + dir.y;
 
-                // 如果目标格子还没有被访问过（还是墙）
-                if (grid[ny][nx] === 1) {
-                    // 打通墙壁和目标格子
-                    grid[py][px] = 0;
-                    grid[ny][nx] = 0;
+                    if (nx > 0 && nx < gridWidth && ny > 0 && ny < gridHeight && !visited[ny][nx]) {
+                        neighbors.push({ x: nx, y: ny });
+                    }
+                }
 
-                    // 把新拓展格子周围的墙再加进来
-                    addWalls(nx, ny, walls);
+                if (neighbors.length > 0) {
+                    // 随机选一个邻居
+                    let next = neighbors[Math.floor(Math.random() * neighbors.length)];
+
+                    // 打通当前格子和邻居之间的墙
+                    grid[(current.y + next.y) / 2][(current.x + next.x) / 2] = 0;
+                    grid[next.y][next.x] = 0;
+
+                    visited[next.y][next.x] = true;
+                    stack.push(next);
+                } else {
+                    stack.pop();
                 }
             }
 
             // 设置入口和出口
-            grid[1][0] = 0;
-            grid[gridHeight - 2][gridWidth - 1] = 0;
+            grid[1][0] = 0; // 左上入口
+            grid[gridHeight - 2][gridWidth - 1] = 0; // 右下出口
 
-            // 自动寻路
+            // 寻找标准解法路径 (BFS广度优先搜索寻路)
             findSolution();
 
-            // 渲染
-            draw();
+            // 渲染到画布
+            drawMaze();
         }
 
-        // 辅助函数：将一个格子周围的所有“墙壁桥梁”加入待选列表
-        function addWalls(x, y, walls) {
-            let dirs = [
-                { dx: 0, dy: -2 }, // 上
-                { dx: 2, dy: 0 },  // 右
-                { dx: 0, dy: 2 },  // 下
-                { dx: -2, dy: 0 }  // 左
-            ];
-
-            for (let dir of dirs) {
-                let nx = x + dir.dx;
-                let ny = y + dir.dy;
-
-                if (nx > 0 && nx < gridWidth && ny > 0 && ny < gridHeight) {
-                    if (grid[ny][nx] === 1) {
-                        walls.push({
-                            px: x + dir.dx / 2, // 两个格子中间的墙
-                            py: y + dir.dy / 2,
-                            nx: nx,             // 跨过去的下一个格子
-                            ny: ny
-                        });
-                    }
-                }
-            }
-        }
-
-        // 广度优先搜索 (BFS) 寻找解法
+        // 自动寻找从入口到出口的唯一解
         function findSolution() {
             let queue = [{ x: 0, y: 1, path: [{ x: 0, y: 1 }] }];
             let visited = Array(gridHeight).fill().map(() => Array(gridWidth).fill(false));
@@ -217,9 +307,10 @@
         }
 
         // 绘制迷宫
-        function draw() {
+        function drawMaze() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            // 绘制墙壁和道路
             for (let y = 0; y < gridHeight; y++) {
                 for (let x = 0; x < gridWidth; x++) {
                     if (grid[y][x] === 1) {
@@ -237,16 +328,16 @@
                 }
             }
 
-            // 入口和出口标志
-            // ctx.fillStyle = '#2ecc71';
+            // 标注入口和出口的文字或颜色提示
+            // ctx.fillStyle = '#2ecc71'; // 绿色代表开始
             // ctx.fillRect(0, cellSize, cellSize, cellSize);
-            // ctx.fillStyle = '#e74c3c';
+            // ctx.fillStyle = '#e74c3c'; // 红色代表结束
             // ctx.fillRect((gridWidth - 1) * cellSize, (gridHeight - 2) * cellSize, cellSize, cellSize);
 
-            // 绘制橙色答案路径
+            // 如果开启了显示答案，绘制解题路径
             if (showSolution) {
                 ctx.lineWidth = cellSize / 3;
-                ctx.strokeStyle = '#e67e22';
+                ctx.strokeStyle = '#e67e22'; // 答案路径颜色：橙色
                 ctx.lineCap = 'round';
                 ctx.lineJoin = 'round';
                 ctx.beginPath();
@@ -261,19 +352,77 @@
             }
         }
 
-        function toggleAnswer() {
-            showSolution = !showSolution;
-            draw();
+        // 获取触摸/鼠标相对 canvas 的坐标
+        function getPos(e) {
+            const rect = drawingCanvas.getBoundingClientRect();
+            // 兼容手机触摸屏(touch)和电脑鼠标(mouse)
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
         }
 
+        // 开始画画
+        function startDrawing(e) {
+            isDrawing = true;
+            const pos = getPos(e);
+            dCtx.beginPath();
+            dCtx.moveTo(pos.x, pos.y);
+        }
+
+        // 正在画画
+        function draw(e) {
+            if (!isDrawing) return;
+            // 阻止默认的滚动事件（手机端尤其重要）
+            e.preventDefault();
+
+            const pos = getPos(e);
+            dCtx.lineTo(pos.x, pos.y);
+            dCtx.stroke();
+        }
+
+        // 停止画画
+        function stopDrawing() {
+            isDrawing = false;
+            dCtx.closePath();
+        }
+
+        // 手机触摸事件
+        drawingCanvas.addEventListener('touchstart', startDrawing, { passive: false });
+        drawingCanvas.addEventListener('touchmove', draw, { passive: false });
+        drawingCanvas.addEventListener('touchend', stopDrawing);
+
+        // 电脑鼠标事件
+        drawingCanvas.addEventListener('mousedown', startDrawing);
+        drawingCanvas.addEventListener('mousemove', draw);
+        drawingCanvas.addEventListener('mouseup', stopDrawing);
+        drawingCanvas.addEventListener('mouseleave', stopDrawing);
+
+        // 清除笔迹
+        function clearDrawing() {
+            // 使用 clearRect 清空画布，因为没有设置背景色，清空后天然就是透明的
+            dCtx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+        }
+
+        // 切换答案显示状态
+        function toggleAnswer() {
+            showSolution = !showSolution;
+            drawMaze();
+        }
+
+        // 下载图片功能
         function downloadMaze() {
             const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
             const link = document.createElement('a');
-            link.download = `趣味多岔路迷宫_${Date.now()}.png`;
+            link.download = `迷宫_${Date.now()}.png`;
             link.href = image;
             link.click();
         }
 
+        // 页面加载时自动生成第一个迷宫
         window.onload = initMaze;
     </script>
 </body>

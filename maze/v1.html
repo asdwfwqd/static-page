@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>儿童智能迷宫生成器 (20x20)</title>
     <style>
         body {
@@ -46,6 +47,14 @@
             background-color: #2980b9;
         }
 
+        button.btn-clr {
+            background-color: #ff4757;
+        }
+
+        button.btn-clr:hover {
+            background-color: #e84118;
+        }
+
         button.btn-ans {
             background-color: #e67e22;
         }
@@ -62,18 +71,59 @@
             background-color: #27ae60;
         }
 
+        .container {
+            position: relative;
+        }
+
         .canvas-container {
+            position: relative;
+            width: 0px;
+            height: 0px;
             margin: 20px auto;
             background: white;
-            padding: 15px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             display: inline-block;
         }
 
         canvas {
-            display: block;
-            /* border: 4px solid #2c3e50; */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        #hero {
+            position: relative;
+            left: 0;
+            bottom: 0;
+            width: auto;
+            height: 100px;
+            z-index: 0;
+        }
+
+        #enemy {
+            position: relative;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: 100px;
+            z-index: 0;
+        }
+
+        #mazeCanvas {
+            background-color: #ffffff;
+            /* 底色 */
+            z-index: 1;
+        }
+
+        #drawingCanvas {
+            z-index: 2;
+            cursor: crosshair;
+            /* 防止手机上划动时导致整个页面被拖动或缩放 */
+            touch-action: none;
         }
     </style>
 </head>
@@ -85,12 +135,18 @@
 
     <div class="control-panel">
         <button onclick="initMaze()">🎲 生成新迷宫</button>
+        <button class="btn-clr" onclick="clearDrawing()">🧽清除笔迹</button>
         <button class="btn-ans" onclick="toggleAnswer()">👁️ 显示/隐藏答案</button>
         <button class="btn-down" onclick="downloadMaze()">💾 下载迷宫图片</button>
     </div>
 
-    <div class="canvas-container">
-        <canvas id="mazeCanvas"></canvas>
+    <div class="container">
+        <img id="hero">
+        <div class="canvas-container">
+            <canvas id="mazeCanvas"></canvas>
+            <canvas id="drawingCanvas"></canvas>
+        </div>
+        <img id="enemy">
     </div>
 
     <script>
@@ -107,14 +163,60 @@
         let solutionPath = [];
         let showSolution = false;
 
+        // 迷宫 Canvas
         const canvas = document.getElementById('mazeCanvas');
         const ctx = canvas.getContext('2d');
 
         canvas.width = gridWidth * cellSize;
         canvas.height = gridHeight * cellSize;
 
+        // 画板 Canvas
+        const drawingCanvas = document.getElementById('drawingCanvas');
+        const dCtx = drawingCanvas.getContext('2d');
+
+        drawingCanvas.width = canvas.width
+        drawingCanvas.height = canvas.height
+        // 设置画笔样式
+        dCtx.strokeStyle = '#e74c3c'; // 画笔颜色（单色）
+        dCtx.lineWidth = 5;           // 画笔粗细
+        dCtx.lineCap = 'round';       // 让线条转弯和末端更圆滑
+        dCtx.lineJoin = 'round';
+
+        let isDrawing = false;
+
+        // 背景
+        const hero = document.getElementById('hero');
+        hero.style.bottom = (canvas.height - 40) + 'px';
+
+        // 父容器
+        const container = document.querySelector('.canvas-container');
+        container.style.width = canvas.width + 'px';
+        container.style.height = canvas.height + 'px';
+
+        // 图片范围
+        function getRandomNum(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // 随机角色
+        function randomImg(type) {
+            switch (type) {
+                case "hero":
+                    const heroImg = document.getElementById('hero');
+                    heroImg.src = `./img/hero_${getRandomNum(1, 9)}.png`;
+                    break;
+                case "enemy":
+                    const enemyImg = document.getElementById('enemy');
+                    enemyImg.src = `./img/enemy_${getRandomNum(1, 9)}.png`;
+                    break;
+            }
+        }
+
         // 初始化并生成迷宫
         function initMaze() {
+            randomImg("hero");
+            randomImg("enemy");
+
             showSolution = false;
 
             // 1代表墙，0代表路
@@ -172,7 +274,7 @@
             findSolution();
 
             // 渲染到画布
-            draw();
+            drawMaze();
         }
 
         // 自动寻找从入口到出口的唯一解
@@ -205,7 +307,7 @@
         }
 
         // 绘制迷宫
-        function draw() {
+        function drawMaze() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // 绘制墙壁和道路
@@ -250,10 +352,65 @@
             }
         }
 
+        // 获取触摸/鼠标相对 canvas 的坐标
+        function getPos(e) {
+            const rect = drawingCanvas.getBoundingClientRect();
+            // 兼容手机触摸屏(touch)和电脑鼠标(mouse)
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        // 开始画画
+        function startDrawing(e) {
+            isDrawing = true;
+            const pos = getPos(e);
+            dCtx.beginPath();
+            dCtx.moveTo(pos.x, pos.y);
+        }
+
+        // 正在画画
+        function draw(e) {
+            if (!isDrawing) return;
+            // 阻止默认的滚动事件（手机端尤其重要）
+            e.preventDefault();
+
+            const pos = getPos(e);
+            dCtx.lineTo(pos.x, pos.y);
+            dCtx.stroke();
+        }
+
+        // 停止画画
+        function stopDrawing() {
+            isDrawing = false;
+            dCtx.closePath();
+        }
+
+        // 手机触摸事件
+        drawingCanvas.addEventListener('touchstart', startDrawing, { passive: false });
+        drawingCanvas.addEventListener('touchmove', draw, { passive: false });
+        drawingCanvas.addEventListener('touchend', stopDrawing);
+
+        // 电脑鼠标事件
+        drawingCanvas.addEventListener('mousedown', startDrawing);
+        drawingCanvas.addEventListener('mousemove', draw);
+        drawingCanvas.addEventListener('mouseup', stopDrawing);
+        drawingCanvas.addEventListener('mouseleave', stopDrawing);
+
+        // 清除笔迹
+        function clearDrawing() {
+            // 使用 clearRect 清空画布，因为没有设置背景色，清空后天然就是透明的
+            dCtx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+        }
+
         // 切换答案显示状态
         function toggleAnswer() {
             showSolution = !showSolution;
-            draw();
+            drawMaze();
         }
 
         // 下载图片功能
