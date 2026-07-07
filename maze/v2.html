@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <base href="https://asdwfwqd.github.io/static-page/maze/">
     <title>儿童智能迷宫生成器 (20x20)</title>
     <style>
@@ -116,7 +116,6 @@
 
         #mazeCanvas {
             background-color: #ffffff;
-            /* 底色 */
             z-index: 1;
         }
 
@@ -193,6 +192,27 @@
         const container = document.querySelector('.canvas-container');
         container.style.width = canvas.width + 'px';
         container.style.height = canvas.height + 'px';
+
+        // 页面
+        function adjustViewport() {
+            var systemWidth = window.screen.width
+            var systemHeight = window.screen.height
+            var viewportMeta = document.getElementById('viewport')
+            let scale
+            if (systemHeight < systemWidth) {
+                // 横屏
+                scale = systemHeight / (canvas.height + 300)
+            } else {
+                // 竖屏
+                scale = systemWidth / (canvas.width + 300)
+            }
+            console.log('systemWidth', systemWidth)
+            console.log('systemHeight', systemHeight)
+            console.log('目标宽度', canvas.width + 300)
+            console.log('缩放', scale)
+
+            viewportMeta.setAttribute('content', `width=device-width, initial-scale=${scale}, user-scalable=no`)
+        }
 
         // 图片范围
         function getRandomNum(min, max) {
@@ -424,7 +444,14 @@
         }
 
         // 页面加载时自动生成第一个迷宫
-        window.onload = initMaze;
+        window.onload = function () {
+            initMaze()
+            adjustViewport()
+        }
+
+        // 监听手机旋转或窗口大小改变
+        window.addEventListener('resize', adjustViewport)
+        window.addEventListener('orientationchange', adjustViewport)
     </script>
 </body>
 
